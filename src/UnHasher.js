@@ -45,6 +45,7 @@ class UnHasher extends React.Component {
             <TextField
               label="Hash value"
               value={inHash}
+              type="number"
               onChange={this.handleHashChange}
               style={{ width: "400px" }}
             />
@@ -53,6 +54,7 @@ class UnHasher extends React.Component {
             <TextField
               label="Original length"
               value={outLength}
+              type="number"
               onChange={this.handleLengthChange}
             />
           </Grid>

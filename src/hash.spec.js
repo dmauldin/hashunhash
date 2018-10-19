@@ -1,4 +1,4 @@
-var { hash, unhash } = require("./hash.js");
+import { hash, unhash } from "./hash.js";
 
 describe("hash", () => {
   it("correctly hashes 'leepadg'", () => {

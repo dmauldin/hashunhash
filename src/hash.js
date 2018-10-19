@@ -5,22 +5,22 @@ const prime = 37;
 const base = 7;
 const minHash = prime * base;
 
-function hash(s = "") {
-  let h = new BN(base, 10);
-  for (var i = 0; i < s.length; i++) {
+function hash(str = "") {
+  let hsh = new BN(base, 10);
+  for (let i = 0; i < str.length; i++) {
     // i prefix = inline, n suffix = argument is a JS Number (not a BN object)
-    h.imuln(prime).iaddn(letters.indexOf(s[i]));
+    hsh.imuln(prime).iaddn(letters.indexOf(str[i]));
   }
-  return h;
+  return hsh;
 }
 
-function unhash(n = 0, len = 0) {
-  if (n <= minHash) {
+function unhash(hsh = 0, len = 0) {
+  if (hsh <= minHash) {
     return "";
   }
 
   const maxGuessLength = 23;
-  const hv = new BN(n, 10);
+  const hv = new BN(hsh, 10);
   let winner = "";
 
   // if no length is provided, let's at least take a guess
