@@ -24,6 +24,7 @@ class Hasher extends React.Component {
           label="String to hash"
           value={inString}
           onChange={this.handleChange}
+          helperText="Only use characters from [acdegilmnoprstuw]"
         />
         <Typography style={{ marginTop: "1em" }}>
           Hashed value: {hashed}
