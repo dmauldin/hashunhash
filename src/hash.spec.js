@@ -8,12 +8,16 @@ describe("hash", () => {
   it("correctly hashes 'promenade'", () => {
     expect(hash("promenade").toString()).toBe("945924806726376");
   });
-  it("correctly hashes 'promenadeade", () => {
+  it("correctly hashes 'promenadeade'", () => {
     expect(hash("promenadeade").toString()).toBe("47913929235111123605");
   });
-  it("correctly hashes 'westernista", () => {
+  it("correctly hashes 'westernista'", () => {
     expect(hash("westernista").toString()).toBe("1317985395604951854");
   });
+  it("correctly hashes with results larger than 64bit", () => {
+    expect(hash("westernistawesternista").toString()).toBe("234492827126094330541985534112684665");
+  });
+
 });
 
 describe("unhash", () => {
