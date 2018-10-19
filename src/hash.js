@@ -37,7 +37,7 @@ function unhash(hsh = 0, len = 0) {
   for (let i = 0; i < len; i++) {
     for (let letterIndex = 0; letterIndex < letters.length; letterIndex++) {
       const letter = letters[letterIndex];
-      // TODO: optimize
+      // TODO: optimize by using a binary search instead of linearly finding the next letter
       const high = (winner + letter).padEnd(len, "w");
       const highHash = hash(high);
 
