@@ -3,7 +3,6 @@ const BN = require("bn.js");
 const letters = "acdegilmnoprstuw";
 const prime = 37;
 const base = 7;
-const minHash = prime * base;
 
 function hash(str = "") {
   let hsh = new BN(base, 10);
@@ -15,13 +14,11 @@ function hash(str = "") {
 }
 
 function unhash(hsh = 0, len = 0) {
-  if (hsh <= minHash) {
-    return "";
-  }
+  // initial value, mod 37 is the final index
+  // initial value divided by 37 is the next value
 
   const maxGuessLength = 23;
-  const hv = new BN(hsh, 10);
-  let winner = "";
+  let hv = new BN(hsh, 10);
 
   // if no length is provided, let's at least take a guess
   // (could also determine if the hash function is collision free and then this
@@ -35,31 +32,16 @@ function unhash(hsh = 0, len = 0) {
         return s;
       }
     }
-  }
-
-  // iterate over the positions in the original string based on the given length
-  for (let i = 0; i < len; i++) {
-    // iterate over the possible characters for this position in the original string
-    for (let letterIndex = 0; letterIndex < letters.length; letterIndex++) {
-      const letter = letters[letterIndex];
-      // TODO: optimize by using a binary search instead of linearly finding the next letter
-      const high = (winner + letter).padEnd(len, "w");
-      const highHash = hash(high);
-
-      if (hv.lte(highHash)) {
-        // only compute the lower bound if the original value is under the high bound
-        const low = (winner + letter).padEnd(len, "a");
-        const lowHash = hash(low);
-        if (hv.gte(lowHash)) {
-          // correct letter for winner[i] found as letters[letterIndex]
-          winner += letter;
-          break;
-        }
-      }
+  } else {
+    // iterate over the positions in the original string based on the given length
+    let chars = []
+    while (hv > 7) {
+      const rem = hv.modn(prime);
+      hv.idivn(prime);
+      chars.unshift(letters[rem]);
     }
+    return chars.join('');
   }
-
-  return winner;
 }
 
 module.exports = { hash, unhash };
