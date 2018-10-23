@@ -21,8 +21,6 @@ function unhash(hsh = 0, len = 0) {
   let hv = new BN(hsh, 10);
 
   // if no length is provided, let's at least take a guess
-  // (could also determine if the hash function is collision free and then this
-  // might not be a guess, at all)
   if (len < 1) {
     // iterate through lengths starting from 1 to see if we get any matches
     // could be optimized to start with a min length based on the size of hsh
@@ -33,7 +31,6 @@ function unhash(hsh = 0, len = 0) {
       }
     }
   } else {
-    // iterate over the positions in the original string based on the given length
     let chars = []
     while (hv > 7) {
       const rem = hv.modn(prime);
