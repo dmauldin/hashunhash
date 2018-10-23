@@ -32,7 +32,7 @@ function unhash(hsh = 0, len = 0) {
     }
   } else {
     let chars = []
-    while (hv > 7) {
+    while (hv.gtn(base)) {
       const rem = hv.modn(prime);
       hv.idivn(prime);
       chars.unshift(letters[rem]);
