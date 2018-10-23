@@ -36,7 +36,7 @@ class UnHasher extends React.Component {
     const inHash = this.state.inHash;
     const outLength = this.state.outLength;
     const unhashed = unhash(this.state.inHash, this.state.outLength);
-    const guess = unhashed && outLength < 1;
+    const guess = unhashed && unhashed.length > 0 && outLength < 1;
     return (
       <div>
         <Typography variant="headline">UnHasher</Typography>
@@ -61,7 +61,7 @@ class UnHasher extends React.Component {
         </Grid>
         <Typography style={{ marginTop: "1em" }}>
           Original string: {unhashed}{" "}
-          <GuessNote guess={guess} length={unhashed.length} />
+          <GuessNote guess={guess} length={unhashed && unhashed.length} />
         </Typography>
       </div>
     );
